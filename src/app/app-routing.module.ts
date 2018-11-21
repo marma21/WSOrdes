@@ -11,6 +11,7 @@ const routes: Routes = [
     canActivate: [AuthGuardService],
     loadChildren: './members/member-routing.module#MemberRoutingModule'
   },
+  //{ path: 'tabs', loadChildren: './tabs/tabs.module#TabsPageModule' },
 ];
  
 @NgModule({

@@ -33,16 +33,20 @@ export class AuthenticationService {
  loginUser(email:string, password:string){
   return this.afAuth.auth.signInWithEmailAndPassword(email, password)
     .then(user=>{Promise.resolve(user)
-      this.authenticationState.next(true);
-    console.log("login");})
+        this.storage.set(TOKEN_KEY, '1234567').then(() => {
+        this.authenticationState.next(true);
+        });
+    })
     .catch(err=>Promise.reject(err))
 }
 
  // Logout de usuario
  logout(){
   this.afAuth.auth.signOut().then(()=>{
-    // hemos salido
-  })
+    this.storage.remove(TOKEN_KEY).then(() => {
+      this.authenticationState.next(false);
+      });
+    })
 }
 
 // Devuelve la session
@@ -59,7 +63,7 @@ checkToken() {
   }
  
   login() {
-    return this.storage.set(TOKEN_KEY, 'Bearer 1234567').then(() => {
+    return this.storage.set(TOKEN_KEY, '1234567').then(() => {
       this.authenticationState.next(true);
     });
   }
