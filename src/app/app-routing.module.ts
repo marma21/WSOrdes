@@ -5,13 +5,9 @@ import { Routes, RouterModule } from '@angular/router';
 const routes: Routes = [
   { path: '', redirectTo: 'login', pathMatch: 'full' },
   { path: 'login', loadChildren: './public/login/login.module#LoginPageModule' },
-  { path: 'register', loadChildren: './public/register/register.module#RegisterPageModule' },
-  { 
-    path: 'members', 
-    canActivate: [AuthGuardService],
-    loadChildren: './members/member-routing.module#MemberRoutingModule'
-  },
-  //{ path: 'tabs', loadChildren: './tabs/tabs.module#TabsPageModule' },
+  //{ path: 'tabs', loadChildren: './tabs/tabs.module#TabsPageModule'},
+  { path: 'members',canActivate: [AuthGuardService],loadChildren: './members/member-routing.module#MemberRoutingModule'},
+  //{ path: 'tabs',  canActivate: [AuthGuardService], loadChildren: './tabs/tabs.module#TabsPageModule' },
 ];
  
 @NgModule({

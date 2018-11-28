@@ -1,30 +1,26 @@
 <ion-tabs>
-
-  <ion-tab tab="home">
-    <ion-router-outlet name="home"></ion-router-outlet>
+  <ion-tab tab="proveedores">
+    <ion-router-outlet name="proveedores"></ion-router-outlet>
   </ion-tab>
-  <ion-tab tab="about">
-    <ion-router-outlet name="about"></ion-router-outlet>
+  <ion-tab tab="pedidos">
+    <ion-router-outlet name="pedidos"></ion-router-outlet>
   </ion-tab>
-  <ion-tab tab="contact">
-    <ion-router-outlet name="contact"></ion-router-outlet>
+  <ion-tab tab="listaprecios">
+    <ion-router-outlet name="listaprecios"></ion-router-outlet>
   </ion-tab>
 
   <ion-tab-bar slot="bottom">
-
-    <ion-tab-button tab="home" href="/members/tabs/(home:home)">
-      <ion-icon name="home"></ion-icon>
-      <ion-label>Home</ion-label>
-    </ion-tab-button>
-
-    <ion-tab-button tab="about" href="/members/tabs/(about:about)">
+    <ion-tab-button tab="proveedores" href="/members/tabs/(proveedores:proveedores)">
       <ion-icon name="information-circle"></ion-icon>
-      <ion-label>About</ion-label>
+      <ion-label>Proveedores</ion-label>
     </ion-tab-button>
-
-    <ion-tab-button tab="contact" href="/members/tabs/(contact:contact)">
-      <ion-icon name="contacts"></ion-icon>
-      <ion-label>Contact</ion-label>
+    <ion-tab-button tab="pedidos" href="/members/tabs/(pedidos:pedidos)">
+      <ion-icon name="cart"></ion-icon>
+      <ion-label>Pedidos</ion-label>
+    </ion-tab-button>
+    <ion-tab-button tab="listaprecios" href="/members//tabs/(listaprecios:listaprecios)">
+      <ion-icon name="ios-pricetags"></ion-icon>
+      <ion-label>Precios</ion-label>
     </ion-tab-button>
 
   </ion-tab-bar>

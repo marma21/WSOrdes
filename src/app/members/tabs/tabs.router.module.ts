@@ -2,9 +2,10 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
 import { TabsPage } from './tabs.page';
-import { HomePage } from '../home/home.page';
-import { AboutPage } from '../about/about.page';
-import { ContactPage } from '../contact/contact.page';
+import { PedidosPage } from '../pedidos/pedidos.page';
+import { ProveedoresPage } from '../proveedores/proveedores.page';
+import { ProveedoresDetallePage } from '../proveedores-detalle/proveedores-detalle.page';
+import { ListapreciosPage } from '../listaprecios/listaprecios.page';
 
 const routes: Routes = [
   {
@@ -13,29 +14,34 @@ const routes: Routes = [
     children: [
       {
         path: '',
-        redirectTo: '/members/tabs/(home:home)',
+        redirectTo: '/members/tabs/(proveedores:proveedores)',
         pathMatch: 'full',
       },
       {
-        path: 'home',
-        outlet: 'home',
-        component: HomePage
+        path: 'pedidos',
+        outlet: 'pedidos',
+        component: PedidosPage
       },
       {
-        path: 'about',
-        outlet: 'about',
-        component: AboutPage
+        path: 'proveedores',
+        outlet: 'proveedores',
+        component: ProveedoresPage
       },
       {
-        path: 'contact',
-        outlet: 'contact',
-        component: ContactPage
+        path: 'proveedores-detalle',
+        outlet: 'proveedores',
+        component: ProveedoresDetallePage
+      },
+      {
+        path: 'listaprecios',
+        outlet: 'listaprecios',
+        component: ListapreciosPage
       }
     ]
   },
   {
     path: '',
-    redirectTo: '/members/tabs/(home:home)',
+    redirectTo: '/members/tabs/(proveedores:proveedores)',
     pathMatch: 'full'
   }
 ];
