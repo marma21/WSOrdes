@@ -8,6 +8,9 @@ export interface Proveedor {
   task: string;
   priority: number;
   createdAt: number;
+  nombre: string;
+  email: string;
+  telefono: string;
 }
 
 @Injectable({

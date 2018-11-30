@@ -21,7 +21,13 @@ export class ProveedoresPage implements OnInit {
   remove(item) {
     this.firedbservice.removeProveedor(item.id);
   }
-  gotoDetail(){
-    this.router.navigateByUrl('/members/tabs/(proveedores:proveedores-detalle)');
+  gotoDetail(id){
+    if (id==null){
+      this.router.navigateByUrl('/members/tabs/(proveedores:proveedores-detalle/)');
+    }
+    else{
+      this.router.navigateByUrl('/members/tabs/(proveedores:proveedores-detalle/'+id+')');
+    }
+    
   }
 }

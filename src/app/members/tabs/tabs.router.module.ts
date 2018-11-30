@@ -28,7 +28,7 @@ const routes: Routes = [
         component: ProveedoresPage
       },
       {
-        path: 'proveedores-detalle',
+        path: 'proveedores-detalle/:id',
         outlet: 'proveedores',
         component: ProveedoresDetallePage
       },

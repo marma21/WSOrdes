@@ -12,7 +12,10 @@ export class ProveedoresDetallePage implements OnInit {
   proveedor: Proveedor = {
     task: 'test',
     createdAt: new Date().getTime(),
-    priority: 2
+    priority: 2,
+    nombre:'',
+    email:'',
+    telefono:''
   };
  
   proveeedorId = null;
@@ -22,13 +25,14 @@ export class ProveedoresDetallePage implements OnInit {
   ngOnInit() {
     
     this.proveeedorId = this.route.snapshot.params.id;
+  
     if (this.proveeedorId)  {
       this.loadProveedor();
     }
   }
   async loadProveedor() {
     const loading = await this.loadingController.create({
-      message: 'Loading ..'
+      message: 'Cargando ..'
     });
     await loading.present();
  
@@ -41,7 +45,7 @@ export class ProveedoresDetallePage implements OnInit {
   async saveProveedor() {
  
     const loading = await this.loadingController.create({
-      message: 'Saving ..'
+      message: 'Grabando ..'
     });
     await loading.present();
  

@@ -8,6 +8,7 @@ const routes: Routes = [
   //{ path: 'pedidos', loadChildren: './pedidos/pedidos.module#PedidosPageModule' },
   //{ path: 'listaprecios', loadChildren: './listaprecios/listaprecios.module#ListapreciosPageModule' },
   { path: '', loadChildren: './tabs/tabs.module#TabsPageModule'},
+  { path: 'pedidos-detalle', loadChildren: './pedidos-detalle/pedidos-detalle.module#PedidosDetallePageModule' },
   //{ path: 'proveedoresDetalle', loadChildren: './proveedores-detalle/proveedores-detalle.module#ProveedoresDetallePageModule' },
 ];
  
