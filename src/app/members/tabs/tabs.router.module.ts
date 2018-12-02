@@ -6,6 +6,7 @@ import { PedidosPage } from '../pedidos/pedidos.page';
 import { ProveedoresPage } from '../proveedores/proveedores.page';
 import { ProveedoresDetallePage } from '../proveedores-detalle/proveedores-detalle.page';
 import { ListapreciosPage } from '../listaprecios/listaprecios.page';
+import { PedidosDetallePage } from '../pedidos-detalle/pedidos-detalle.page';
 
 const routes: Routes = [
   {
@@ -14,13 +15,18 @@ const routes: Routes = [
     children: [
       {
         path: '',
-        redirectTo: '/members/tabs/(proveedores:proveedores)',
+        redirectTo: '/members/tabs/(pedidos:pedidos)',
         pathMatch: 'full',
       },
       {
         path: 'pedidos',
         outlet: 'pedidos',
         component: PedidosPage
+      },
+      {
+        path: 'pedidos-detalle/:id',
+        outlet: 'pedidos',
+        component: PedidosDetallePage
       },
       {
         path: 'proveedores',
@@ -41,7 +47,7 @@ const routes: Routes = [
   },
   {
     path: '',
-    redirectTo: '/members/tabs/(proveedores:proveedores)',
+    redirectTo: '/members/tabs/(pedidos:pedidos)',
     pathMatch: 'full'
   }
 ];

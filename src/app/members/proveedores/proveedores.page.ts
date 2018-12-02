@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {Proveedor,FiredbService} from '../../services/firedb.service';
 import { Router } from '@angular/router';
+import { TabDelegate } from '@ionic/angular';
 
 @Component({
   selector: 'app-proveedores',
@@ -17,11 +18,12 @@ export class ProveedoresPage implements OnInit {
     this.firedbservice.getProveedores().subscribe(res => {
       this.proveedores = res;
     });
+    
   }
   remove(item) {
     this.firedbservice.removeProveedor(item.id);
   }
-  gotoDetail(id){
+  gotoDetail(id?){
     if (id==null){
       this.router.navigateByUrl('/members/tabs/(proveedores:proveedores-detalle/)');
     }

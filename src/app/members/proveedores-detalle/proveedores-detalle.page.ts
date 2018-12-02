@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { NavController, LoadingController } from '@ionic/angular';
 import {Proveedor,FiredbService} from '../../services/firedb.service';
+import { IonicSelectableComponent } from 'ionic-selectable'
 
 @Component({
   selector: 'app-proveedores-detalle',
@@ -60,5 +61,12 @@ export class ProveedoresDetallePage implements OnInit {
         this.nav.goBack();
       });
     }
+  }
+
+  portChange(event: {
+    component: IonicSelectableComponent,
+    value: any
+  }) {
+    console.log('port:', event.value);
   }
 }

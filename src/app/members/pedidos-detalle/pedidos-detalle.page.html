@@ -1,9 +1,33 @@
 <ion-header>
-  <ion-toolbar>
-    <ion-title>pedidos-detalle</ion-title>
+  <ion-toolbar color="light">
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/tabs"></ion-back-button>
+    </ion-buttons>
+    <ion-title>Pedido - Detalle</ion-title>
+    <ion-buttons slot="end">
+          <ion-icon (click)="sendWS()" color="success" size="large" name="logo-whatsapp"></ion-icon>
+    </ion-buttons>
   </ion-toolbar>
 </ion-header>
-
+ 
 <ion-content padding>
+  <ion-list lines="full">
+    <ion-item>
+      <ion-input required type="number" placeholder="Numeero" [(ngModel)]="pedido.numero"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-input required type="text" placeholder="Prioridad" [(ngModel)]="pedido.priority"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label>Proveedor</ion-label>
+      <ionic-selectable 
+      [(ngModel)]="pedido.proveedor" 
+      itemValueField="id" 
+      itemTextField="nombre"
+        [items]="proveedores" [canSearch]="true" (onChange)="portChange($event)">
+      </ionic-selectable>
+  </ion-item>
+  </ion-list>
 
+  <ion-button expand="full" (click)="savePedido()">Guardar</ion-button>
 </ion-content>
