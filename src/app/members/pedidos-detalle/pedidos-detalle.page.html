@@ -3,7 +3,7 @@
     <ion-buttons slot="start">
       <ion-back-button defaultHref="/tabs"></ion-back-button>
     </ion-buttons>
-    <ion-title>Pedido - Detalle</ion-title>
+    <ion-title>Pedido - {{pedido.numero}}</ion-title>
     <ion-buttons slot="end">
           <ion-icon (click)="sendWS()" color="success" size="large" name="logo-whatsapp"></ion-icon>
     </ion-buttons>
@@ -13,19 +13,18 @@
 <ion-content padding>
   <ion-list lines="full">
     <ion-item>
-      <ion-input required type="number" placeholder="Numeero" [(ngModel)]="pedido.numero"></ion-input>
-    </ion-item>
-    <ion-item>
-      <ion-input required type="text" placeholder="Prioridad" [(ngModel)]="pedido.priority"></ion-input>
-    </ion-item>
-    <ion-item>
       <ion-label>Proveedor</ion-label>
       <ionic-selectable 
       [(ngModel)]="pedido.proveedor" 
       itemValueField="id" 
-      itemTextField="nombre"
+      itemTextField="nombre" 
         [items]="proveedores" [canSearch]="true" (onChange)="portChange($event)">
-      </ionic-selectable>
+        <ng-template ionicSelectableItemTemplate let-proveedor="item">
+          <ion-label>
+            {{proveedor.nombre}} - {{proveedor.telefono}}
+          </ion-label>
+        </ng-template>
+      </ionic-selectable>     
   </ion-item>
   </ion-list>
 

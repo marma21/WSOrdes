@@ -1,0 +1,17 @@
+<ion-header>
+  <ion-toolbar color="success">
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/tabs"></ion-back-button>
+    </ion-buttons>
+    <ion-title>Lista de precios - Detalle</ion-title>
+  </ion-toolbar>
+</ion-header>
+ 
+<ion-content padding>
+  <ion-list lines="full">
+    <ion-item>
+      <ion-input required type="text" placeholder="Nombre" [(ngModel)]="listaprecios.nombre"></ion-input>
+    </ion-item>
+  </ion-list>
+  <ion-button expand="full" (click)="saveListaprecios()">Guardar</ion-button>
+</ion-content>

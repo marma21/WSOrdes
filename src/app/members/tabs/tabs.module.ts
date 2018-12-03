@@ -11,7 +11,8 @@ import { ProveedoresPageModule } from '../proveedores/proveedores.module';
 import { ListapreciosPageModule } from '../listaprecios/listaprecios.module';
 import { PedidosPageModule } from '../pedidos/pedidos.module';
 import { ProveedoresDetallePageModule } from '../proveedores-detalle/proveedores-detalle.module';
-import {PedidosDetallePageModule} from '../pedidos-detalle/pedidos-detalle.module';
+import { PedidosDetallePageModule } from '../pedidos-detalle/pedidos-detalle.module';
+import { ListapreciosDetallePageModule } from '../listaprecios-detalle/listaprecios-detalle.module';
 
 @NgModule({
   imports: [
@@ -23,7 +24,8 @@ import {PedidosDetallePageModule} from '../pedidos-detalle/pedidos-detalle.modul
     ListapreciosPageModule,
     ProveedoresPageModule,
     ProveedoresDetallePageModule,
-    PedidosDetallePageModule
+    PedidosDetallePageModule,
+    ListapreciosDetallePageModule
   ],
   declarations: [TabsPage]
 })

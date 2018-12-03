@@ -14,9 +14,8 @@ import { AlertController } from '@ionic/angular';
 export class PedidosDetallePage implements OnInit {
   pedido: Pedido = {
     createdAt: new Date().getTime(),
-    numero:0,
-    proveedor: [],
-    priority:2
+    numero:new Date().getTime(),
+    proveedor: []
   };
   proveedores: Proveedor[];
   pedidoId = null;
@@ -74,8 +73,8 @@ export class PedidosDetallePage implements OnInit {
     component: IonicSelectableComponent,
     value: any
   }) {
-    console.log('port:', event.value);
   }
+
   sendWS(){
     this.socialSharing.shareViaWhatsAppToReceiver(this.pedido.proveedor.telefono,"hola mundo").then( async a=>{
       let alert = await this.alertController.create({

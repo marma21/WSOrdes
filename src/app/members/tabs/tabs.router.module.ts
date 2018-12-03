@@ -7,6 +7,7 @@ import { ProveedoresPage } from '../proveedores/proveedores.page';
 import { ProveedoresDetallePage } from '../proveedores-detalle/proveedores-detalle.page';
 import { ListapreciosPage } from '../listaprecios/listaprecios.page';
 import { PedidosDetallePage } from '../pedidos-detalle/pedidos-detalle.page';
+import { ListapreciosDetallePage } from '../listaprecios-detalle/listaprecios-detalle.page';
 
 const routes: Routes = [
   {
@@ -42,7 +43,13 @@ const routes: Routes = [
         path: 'listaprecios',
         outlet: 'listaprecios',
         component: ListapreciosPage
+      },
+      {
+        path: 'listaprecios-detalle/:id',
+        outlet: 'listaprecios',
+        component: ListapreciosDetallePage
       }
+
     ]
   },
   {

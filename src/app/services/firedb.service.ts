@@ -14,9 +14,16 @@ export interface Proveedor {
 }
 export interface Pedido {
   id?: string;
-  priority: number;
   createdAt: number;
   numero: number;
+  proveedor:any;
+}
+
+export interface Listaprecios {
+  id?: string;
+  createdAt: number;
+  nombre: string;
+  productos: [{nombre:string,precio:number}];
   proveedor:any;
 }
 
@@ -28,10 +35,16 @@ export class FiredbService {
   private proveedores: Observable<Proveedor[]>;
   private pedidosCollection: AngularFirestoreCollection<Pedido>;
   private pedidos: Observable<Pedido[]>;
-  constructor(db: AngularFirestore) {
-    this.proveedoresCollection = db.collection<Proveedor>('proveedor');
-    this.pedidosCollection = db.collection<Pedido>('pedido');
-   }
+  private listapreciosCollection: AngularFirestoreCollection<Listaprecios>;
+  private listaprecios: Observable<Listaprecios[]>;
+
+  
+  constructor(db: AngularFirestore) { 
+  
+    this.pedidosCollection = db.collection<Pedido>('pedido', ref => ref.orderBy("numero","desc"));
+    this.proveedoresCollection = db.collection<Proveedor>('proveedor', ref => ref.orderBy("nombre"));
+    this.listapreciosCollection = db.collection<Listaprecios>('listaprecios', ref => ref.orderBy("nombre"));
+  }
 /*************PROVEEDORES */
    getProveedores() {
     this.proveedores = this.proveedoresCollection.snapshotChanges().pipe(
@@ -64,6 +77,7 @@ export class FiredbService {
   
 /*************PEDIDOS */
 getPedidos() {
+  
   this.pedidos = this.pedidosCollection.snapshotChanges().pipe(
     map(actions => {
       return actions.map(a => {
@@ -90,5 +104,35 @@ addPedido(pedido: Pedido) {
 
 removePedido(id) {
   return this.pedidosCollection.doc(id).delete();
+}
+
+/*************LISTAPRECIOS */
+getListaprecios() {
+  this.listaprecios = this.listapreciosCollection.snapshotChanges().pipe(
+    map(actions => {
+      return actions.map(a => {
+        const data = a.payload.doc.data();
+        const id = a.payload.doc.id;
+        return { id, ...data };
+      });
+    })
+  );
+  return this.listaprecios;
+}
+
+getListaprecio(id) {
+  return this.listapreciosCollection.doc<Listaprecios>(id).valueChanges();
+}
+
+updateListaprecio(listaprecios: Listaprecios, id: string) {
+  return this.listapreciosCollection.doc(id).update(listaprecios);
+}
+
+addListaprecio(listaprecios: Listaprecios) {
+  return this.listapreciosCollection.add(listaprecios);
+}
+
+removeListaprecio(id) {
+  return this.listapreciosCollection.doc(id).delete();
 }
 }
