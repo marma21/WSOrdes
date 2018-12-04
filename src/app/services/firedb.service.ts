@@ -23,7 +23,7 @@ export interface Listaprecios {
   id?: string;
   createdAt: number;
   nombre: string;
-  productos: [{nombre:string,precio:number}];
+  productos: [{nombre:string,unidad:string,cantidad:number,precio:number}];
   proveedor:any;
 }
 

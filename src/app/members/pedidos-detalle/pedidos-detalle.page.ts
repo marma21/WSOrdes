@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { NavController, LoadingController } from '@ionic/angular';
-import {Pedido,Proveedor,FiredbService} from '../../services/firedb.service';
+import { Pedido,Proveedor,FiredbService} from '../../services/firedb.service';
 import { IonicSelectableComponent } from 'ionic-selectable';
 import { SocialSharing } from '@ionic-native/social-sharing/ngx';
 import { AlertController } from '@ionic/angular';
