@@ -17,6 +17,9 @@ export interface Pedido {
   createdAt: number;
   numero: number;
   proveedor:any;
+  estado:string;
+  listaprecios:string;
+  productos:any
 }
 
 export interface Listaprecios {

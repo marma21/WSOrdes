@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { NavController, LoadingController } from '@ionic/angular';
-import { Pedido,Proveedor,FiredbService} from '../../services/firedb.service';
+import { Listaprecios, Pedido,Proveedor,FiredbService} from '../../services/firedb.service';
 import { IonicSelectableComponent } from 'ionic-selectable';
 import { SocialSharing } from '@ionic-native/social-sharing/ngx';
 import { AlertController } from '@ionic/angular';
@@ -12,12 +12,18 @@ import { AlertController } from '@ionic/angular';
   styleUrls: ['./pedidos-detalle.page.scss'],
 })
 export class PedidosDetallePage implements OnInit {
+  
   pedido: Pedido = {
     createdAt: new Date().getTime(),
     numero:new Date().getTime(),
-    proveedor: []
-  };
+    proveedor: [],
+    estado:"Iniciado",
+    listaprecios:"",
+    productos:[] 
+   };
+
   proveedores: Proveedor[];
+
   pedidoId = null;
 
   constructor( public route: ActivatedRoute, 

@@ -8,6 +8,8 @@ import { ProveedoresDetallePage } from '../proveedores-detalle/proveedores-detal
 import { ListapreciosPage } from '../listaprecios/listaprecios.page';
 import { PedidosDetallePage } from '../pedidos-detalle/pedidos-detalle.page';
 import { ListapreciosDetallePage } from '../listaprecios-detalle/listaprecios-detalle.page';
+import { ProductosPage } from '../productos/productos.page'
+import { ProductosDetallePage } from '../productos-detalle/productos-detalle.page'
 
 const routes: Routes = [
   {
@@ -48,6 +50,16 @@ const routes: Routes = [
         path: 'listaprecios-detalle/:id',
         outlet: 'listaprecios',
         component: ListapreciosDetallePage
+      },
+      {
+        path: 'productos',
+        outlet: 'productos',
+        component: ProductosPage
+      },
+      {
+        path: 'productos-detalle/:id',
+        outlet: 'productos',
+        component: ProductosDetallePage
       }
 
     ]
