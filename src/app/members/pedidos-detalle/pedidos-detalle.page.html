@@ -11,22 +11,22 @@
 </ion-header>
  
 <ion-content padding>
-  <ion-list lines="full">
-    <ion-item>
-      <ion-label>Proveedor</ion-label>
-      <ionic-selectable 
-      [(ngModel)]="pedido.proveedor" 
-      itemValueField="id" 
-      itemTextField="nombre" 
-        [items]="proveedores" [canSearch]="true" (onChange)="portChange($event)">
-        <ng-template ionicSelectableItemTemplate let-proveedor="item">
-          <ion-label>
-            {{proveedor.nombre}} - {{proveedor.telefono}}
-          </ion-label>
-        </ng-template>
-      </ionic-selectable>     
-  </ion-item>
+  <ion-list lines="full">. 
   </ion-list>
 
+  <ion-item>
+    <ion-label>Proveedor</ion-label>
+    <ionic-selectable 
+    [(ngModel)]="pedido.proveedor" 
+    itemValueField="id" 
+    itemTextField="nombre" 
+      [items]="proveedores" [canSearch]="true" (onChange)="portChange($event)">
+      <ng-template ionicSelectableItemTemplate let-proveedor="item">
+        <ion-label>
+          {{proveedor.nombre}} - {{proveedor.telefono}}
+        </ion-label>
+      </ng-template>
+    </ionic-selectable>     
+  </ion-item>
   <ion-button expand="full" (click)="savePedido()">Guardar</ion-button>
 </ion-content>

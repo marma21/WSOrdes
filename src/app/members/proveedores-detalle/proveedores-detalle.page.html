@@ -19,5 +19,29 @@
       <ion-input required type="tel" placeholder="Teléfono" [(ngModel)]="proveedor.telefono"></ion-input>
     </ion-item>
   </ion-list>
+<!--   <ion-item>
+    <ion-label position="stacked">Productos</ion-label>
+    <ionic-selectable [(ngModel)]="proveedor.productos" itemValueField="id" itemTextField="nombre" [items]="productos"
+      [canSearch]="true" [canClear]="true" [isMultiple]="true" (onChange)="productoChange($event)">
+      <ng-template ionicSelectableValueTemplate let-productos="value">
+        <div class="ionic-selectable-value-item">
+          {{formatPorts(productos)}}
+        </div>
+      </ng-template>
+    </ionic-selectable>
+  </ion-item> -->
+
+  <ion-list><ion-searchbar  [(ngModel)]="buscaproducto" (ionChange)="ionChange()"></ion-searchbar>
+  <ion-label position="stacked">Lista de precios</ion-label>
+    <ion-item-sliding *ngFor="let item of productosfiltrados">
+      <ion-item lines="inset">
+        <ion-label class="my-label">
+          {{item.nombre}} - {{item.ubicacion}} $ <b>{{item.precio}} {{item.unidad}}</b>
+        </ion-label>
+      </ion-item>
+    </ion-item-sliding>
+ 
+  </ion-list>
+  
   <ion-button expand="full" (click)="saveProveedor()">Guardar</ion-button>
 </ion-content>

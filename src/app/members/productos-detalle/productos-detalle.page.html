@@ -1,9 +1,37 @@
 <ion-header>
-  <ion-toolbar>
-    <ion-title>productos-detalle</ion-title>
+  <ion-toolbar color="tertiary">
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/tabs"></ion-back-button>
+    </ion-buttons>
+    <ion-title>Producto - {{producto.nombre}}</ion-title>
   </ion-toolbar>
 </ion-header>
-
+ 
 <ion-content padding>
+  <ion-list lines="full">
+    <ion-item>
+      <ion-input required type="text" placeholder="Nombre" [(ngModel)]="producto.nombre"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-input required type="text" placeholder="ubicacion" [(ngModel)]="producto.ubicacion"></ion-input>
+    </ion-item>
 
+    <ion-item>
+      <ion-label>Proveedor</ion-label>
+      <ionic-selectable 
+      [(ngModel)]="producto.proveedores" 
+      itemValueField="id" 
+      itemTextField="nombre" 
+      [items]="proveedores" [canSearch]="true" [canClear]="true" [isMultiple]="true"
+       (onChange)="proveedorChange($event)">
+      <ng-template ionicSelectableItemTemplate let-proveedor="item">
+        <ion-label>
+          {{proveedor.nombre}}
+        </ion-label>
+      </ng-template> 
+      </ionic-selectable>
+    </ion-item>
+
+  </ion-list>
+  <ion-button expand="full" (click)="saveProducto()">Guardar</ion-button>
 </ion-content>

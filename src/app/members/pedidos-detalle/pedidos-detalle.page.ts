@@ -22,7 +22,7 @@ export class PedidosDetallePage implements OnInit {
     productos:[] 
    };
 
-  proveedores: Proveedor[];
+  proveedores: any;
 
   pedidoId = null;
 
@@ -41,7 +41,7 @@ export class PedidosDetallePage implements OnInit {
       this.loadPedido();
     }
     this.firedbService.getProveedores().subscribe(res => {
-      this.proveedores = res;
+      this.proveedores = res.map(res => ({id:res.id,nombre:res.nombre,telefono:res.telefono}));
     });
   }
   async loadPedido() {

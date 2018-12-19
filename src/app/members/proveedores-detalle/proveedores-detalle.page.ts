@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { NavController, LoadingController } from '@ionic/angular';
-import {Proveedor,FiredbService} from '../../services/firedb.service';
+import {Producto,Proveedor,FiredbService} from '../../services/firedb.service';
 import { IonicSelectableComponent } from 'ionic-selectable'
 
 @Component({
@@ -16,12 +16,19 @@ export class ProveedoresDetallePage implements OnInit {
     priority: 2,
     nombre:'',
     email:'',
-    telefono:''
+    telefono:'',
+    productos:[]
   };
  
+  interface 
   proveeedorId = null;
-
-  constructor( public route: ActivatedRoute, private nav: NavController, private firedbService: FiredbService, private loadingController: LoadingController) { }
+  productos:any ;
+  productosfiltrados:any; 
+  buscaproducto:string;
+  
+  constructor( public route: ActivatedRoute, private nav: NavController, private firedbService: FiredbService, private loadingController: LoadingController) { 
+  }
+  
 
   ngOnInit() {
     
@@ -40,7 +47,17 @@ export class ProveedoresDetallePage implements OnInit {
     this.firedbService.getProveedor(this.proveeedorId).subscribe(res => {
       loading.dismiss();
       this.proveedor = res;
+   /*   res.productos.forEach(element => {
+        this.productos.push(element);
+      });*/
+      this.productos=res.productos;
+      this.productosfiltrados=res.productos;
     });
+    
+/*     this.firedbService.getProductos().subscribe(res => {
+      
+      this.productos = res.map(res => ({id:res.id,nombre:res.nombre,ubicacion:res.ubicacion}));
+    }); */
   }
  
   async saveProveedor() {
@@ -63,10 +80,19 @@ export class ProveedoresDetallePage implements OnInit {
     }
   }
 
-  portChange(event: {
+  productoChange(event: {
     component: IonicSelectableComponent,
     value: any
   }) {
-    console.log('port:', event.value);
+  }
+
+  formatPorts(ports: Producto[]) {
+    return ports.map(port => port.nombre).join(', ');
+  }
+  ionChange (){
+    
+    this.productosfiltrados = this.productos.filter((item) => {
+      return item.nombre.toLowerCase().indexOf(this.buscaproducto.toLowerCase())>-1;
+    });
   }
 }
