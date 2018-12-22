@@ -19,7 +19,7 @@
     <ion-item-sliding *ngFor="let item of pedidos">
       <ion-item lines="inset" (click)="gotoDetail(item.id)">
         <ion-label>
-          {{ item.numero }}
+          {{ item.numero }} - {{item.estado}} 
           <p>{{ item.createdAt | date: 'dd/MM/yyyy'}}</p>
         </ion-label>
         <ion-note slot="end" color="primary">{{ item.proveedor.nombre }}</ion-note>

@@ -4,6 +4,9 @@
       <ion-back-button defaultHref="/tabs"></ion-back-button>
     </ion-buttons>
     <ion-title>Proveedor - Detalle</ion-title>
+    <ion-buttons slot="end">
+        <ion-icon (click)="saveProveedor()" size="large" name="md-archive"></ion-icon>
+  </ion-buttons>
   </ion-toolbar>
 </ion-header>
  
@@ -34,14 +37,9 @@
   <ion-list><ion-searchbar  [(ngModel)]="buscaproducto" (ionChange)="ionChange()"></ion-searchbar>
   <ion-label position="stacked">Lista de precios</ion-label>
     <ion-item-sliding *ngFor="let item of productosfiltrados">
-      <ion-item lines="inset">
-        <ion-label class="my-label">
-          {{item.nombre}} - {{item.ubicacion}} $ <b>{{item.precio}} {{item.unidad}}</b>
-        </ion-label>
+      <ion-item lines="inset" class="my-label">
+          {{item.nombre}} - {{item.ubicacion}} <ion-badge slot="end">{{item.unidad}}</ion-badge><ion-badge slot="end" color="danger">{{item.precio}}</ion-badge>
       </ion-item>
     </ion-item-sliding>
- 
   </ion-list>
-  
-  <ion-button expand="full" (click)="saveProveedor()">Guardar</ion-button>
 </ion-content>

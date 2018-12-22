@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { NavController, LoadingController } from '@ionic/angular';
-import { Listaprecios, Pedido,Proveedor,FiredbService} from '../../services/firedb.service';
+import { Producto, Pedido,Proveedor,FiredbService} from '../../services/firedb.service';
 import { IonicSelectableComponent } from 'ionic-selectable';
 import { SocialSharing } from '@ionic-native/social-sharing/ngx';
 import { AlertController } from '@ionic/angular';
@@ -23,7 +23,7 @@ export class PedidosDetallePage implements OnInit {
    };
 
   proveedores: any;
-
+  productos: any;
   pedidoId = null;
 
   constructor( public route: ActivatedRoute, 
@@ -41,7 +41,8 @@ export class PedidosDetallePage implements OnInit {
       this.loadPedido();
     }
     this.firedbService.getProveedores().subscribe(res => {
-      this.proveedores = res.map(res => ({id:res.id,nombre:res.nombre,telefono:res.telefono}));
+      //this.proveedores = res.map(res => ({id:res.id,nombre:res.nombre,telefono:res.telefono,}));
+      this.proveedores = res;
     });
   }
   async loadPedido() {
@@ -53,9 +54,22 @@ export class PedidosDetallePage implements OnInit {
     this.firedbService.getPedido(this.pedidoId).subscribe(res => {
       loading.dismiss();
       this.pedido = res;
+      this.loadProductos();
     });
   }
  
+  async loadProductos() {
+    const loading = await this.loadingController.create({
+      message: 'Cargando ..'
+    });
+    await loading.present();
+ 
+    this.firedbService.getProveedor(this.pedido.proveedor.id).subscribe(res => {
+      loading.dismiss();
+      this.productos = res.productos;
+    });
+  }
+
   async savePedido() {
  
     const loading = await this.loadingController.create({
@@ -75,14 +89,33 @@ export class PedidosDetallePage implements OnInit {
       });
     }
   }
-  portChange(event: {
+  proveedorChange(event: {
+    component: IonicSelectableComponent,
+    value: any
+  }) {console.log(event.value)
+    if (event.value){
+      this.productos=event.value.productos;
+    }
+    
+  }
+
+  productoChange(event: {
     component: IonicSelectableComponent,
     value: any
   }) {
   }
 
+  
+  formatPorts(ports: Producto[]) {
+    return ports.map(port => port.nombre).join(',');
+  }
+
   sendWS(){
-    this.socialSharing.shareViaWhatsAppToReceiver(this.pedido.proveedor.telefono,"hola mundo").then( async a=>{
+    this.savePedido();
+
+    let mensaje = "*Pedido:*\r\n"+this.pedido.productos.map(port => port.nombre + ": " + port.cantidad + port.unidad).join('\r\n');
+    this.pedido.estado="Enviado";
+    this.socialSharing.shareViaWhatsAppToReceiver(this.pedido.proveedor.telefono,mensaje).then( async a=>{
       let alert = await this.alertController.create({
         header: 'Exito',
         message: 'Se envio el mensaje al teléfono:' +this.pedido.proveedor.telefono,
@@ -97,5 +130,16 @@ export class PedidosDetallePage implements OnInit {
       });
       await alert.present();
     })
+  }
+
+
+  sendEmail(){
+    let mensaje = "*Pedido:*\r\n"+this.pedido.productos.map(port => port.nombre + ": " + port.cantidad + port.unidad).join('\r\n');
+    this.pedido.estado="Enviado";
+    this.socialSharing.shareViaEmail(mensaje, 'Pedido:'+this.pedido.numero, [this.pedido.proveedor.email]).then(() => {
+      // Success!
+    }).catch(() => {
+      // Error!
+    });
   }
 }

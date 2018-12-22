@@ -3,30 +3,57 @@
     <ion-buttons slot="start">
       <ion-back-button defaultHref="/tabs"></ion-back-button>
     </ion-buttons>
-    <ion-title>Pedido - {{pedido.numero}}</ion-title>
+    <ion-title>Pedido - {{pedido.proveedor.telefono}}</ion-title>
     <ion-buttons slot="end">
           <ion-icon (click)="sendWS()" color="success" size="large" name="logo-whatsapp"></ion-icon>
+          <ion-icon (click)="sendEmail()" color="danger" size="large" name="mail"></ion-icon>
     </ion-buttons>
   </ion-toolbar>
 </ion-header>
  
 <ion-content padding>
-  <ion-list lines="full">. 
-  </ion-list>
-
-  <ion-item>
-    <ion-label>Proveedor</ion-label>
-    <ionic-selectable 
-    [(ngModel)]="pedido.proveedor" 
-    itemValueField="id" 
-    itemTextField="nombre" 
-      [items]="proveedores" [canSearch]="true" (onChange)="portChange($event)">
-      <ng-template ionicSelectableItemTemplate let-proveedor="item">
-        <ion-label>
-          {{proveedor.nombre}} - {{proveedor.telefono}}
-        </ion-label>
+  <ion-card> 
+    <ion-item>
+        <ion-label>Estado</ion-label>
+        <ion-select placeholder="Estado" [(ngModel)]="pedido.estado" >
+          <ion-select-option value="Iniciado">Iniciado</ion-select-option>
+          <ion-select-option value="Enviado">Enviado</ion-select-option>
+          <ion-select-option value="Recibido">Recibido</ion-select-option>
+        </ion-select>
+      </ion-item>
+<ion-item>
+  <ion-label>Proveedor</ion-label>
+  <ionic-selectable #componenteProveedor
+  [(ngModel)]="pedido.proveedor" 
+  itemValueField="id" 
+  itemTextField="nombre" 
+    [items]="proveedores" [canSearch]="true" (onChange)="proveedorChange($event)">
+    <ng-template ionicSelectableItemTemplate let-proveedor="item">
+      <ion-label>
+        {{proveedor.nombre}} - {{proveedor.telefono}}
+      </ion-label>
+    </ng-template>
+  </ionic-selectable>
+</ion-item>
+<ion-item>
+    <ion-label>Productos</ion-label>
+    <ionic-selectable [(ngModel)]="pedido.productos" itemValueField="id" itemTextField="nombre" 
+    [items]="productos"
+     [canSearch]="true" [canClear]="true" [isMultiple]="true" (onChange)="productoChange($event)">
+      <ng-template ionicSelectableValueTemplate let-productos="value">
+        <div class="ionic-selectable-value-item">
+          {{formatPorts(productos)}}
+        </div>
       </ng-template>
-    </ionic-selectable>     
+    </ionic-selectable>
   </ion-item>
-  <ion-button expand="full" (click)="savePedido()">Guardar</ion-button>
+</ion-card>
+  <ion-list lines="full"> 
+    <ion-item-sliding *ngFor="let item of pedido.productos">
+      <ion-item lines="inset" class="my-label">
+          {{item.nombre}}<ion-input [(ngModel)]="item.cantidad" color="success" text-right size=2 type="number" placeholder="cantidad" ></ion-input>
+           <ion-badge slot="end">{{item.unidad}}</ion-badge><ion-badge slot="end" color="danger">{{item.cantidad*item.precio| currency:'USD':true:'1.1-1'}}</ion-badge>
+        </ion-item>
+    </ion-item-sliding>    
+</ion-list>
 </ion-content>
